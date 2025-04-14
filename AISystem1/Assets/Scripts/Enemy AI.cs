@@ -18,7 +18,24 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        if (waypoints.Length > 0)
+        // Check for manually assigned player and store in blackboard
+        if (player != null)
+        {
+            if (!FsmBlackboard.GlobalBlackboard.Variables.ContainsKey("PlayerTransform"))
+            {
+                FsmBlackboard.GlobalBlackboard.Set("PlayerTransform", player);
+            }
+        }
+        else
+        {
+            // Try getting from blackboard
+            if (FsmBlackboard.GlobalBlackboard.Variables.ContainsKey("PlayerTransform"))
+            {
+                player = FsmBlackboard.GlobalBlackboard.GetTransform("PlayerTransform");
+            }
+        }
+
+        if (waypoints != null && waypoints.Length > 0)
         {
             agent.SetDestination(waypoints[currentWaypoint].position);
             SetState(State.Patrolling);
@@ -27,7 +44,17 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (player == null || waypoints.Length == 0) return;
+        // Reacquire player if needed
+        if (player == null)
+        {
+            if (FsmBlackboard.GlobalBlackboard.Variables.ContainsKey("PlayerTransform"))
+            {
+                player = FsmBlackboard.GlobalBlackboard.GetTransform("PlayerTransform");
+            }
+        }
+
+        if (player == null || waypoints == null || waypoints.Length == 0)
+            return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -50,7 +77,7 @@ public class EnemyAI : MonoBehaviour
         if (newState != currentState)
         {
             currentState = newState;
-            Debug.Log("Enemy is now: " + currentState.ToString());
+            Debug.Log($"Enemy is now: {currentState}");
         }
     }
 
@@ -68,14 +95,22 @@ public class EnemyAI : MonoBehaviour
     void ChasePlayer()
     {
         SetState(State.Chasing);
-        agent.SetDestination(player.position);
+
+        if (player != null)
+        {
+            agent.SetDestination(player.position);
+        }
     }
 
     void Attack()
     {
         SetState(State.Attacking);
         agent.ResetPath();
-        transform.LookAt(player);
-        Debug.Log("Enemy is attacking!");
+
+        if (player != null)
+        {
+            transform.LookAt(player);
+            Debug.Log("Enemy is attacking!");
+        }
     }
 }
