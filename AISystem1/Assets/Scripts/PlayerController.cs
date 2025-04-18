@@ -23,19 +23,20 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
-    // Update is called once per frame
     void Update()
     {
         ProcessInput();
-        CheckBounds();
         CheckForAttack();
     }
 
     void FixedUpdate()
     {
-        MovePlayer();
+        MovePlayerWithVelocity();
+        ClampPlayerWithinBounds();
     }
 
     private void ProcessInput()
@@ -47,26 +48,28 @@ public class PlayerController : MonoBehaviour
 
         if (movement.sqrMagnitude > 0)
         {
-            // Rotate smoothly toward movement direction
             Quaternion targetRotation = Quaternion.LookRotation(movement);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
         }
     }
 
-    private void MovePlayer()
+    private void MovePlayerWithVelocity()
     {
-        Vector3 newPosition = rb.position + movement * Time.fixedDeltaTime;
-        rb.MovePosition(newPosition);
+        rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
     }
 
-    private void CheckBounds()
+    private void ClampPlayerWithinBounds()
     {
-        float x = transform.position.x;
-        float z = transform.position.z;
-        x = Mathf.Clamp(x, MIN_X, MAX_X);
-        z = Mathf.Clamp(z, MIN_Z, MAX_Z);
+        Vector3 clampedPosition = rb.position;
 
-        transform.position = new Vector3(x, transform.position.y, z);
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, MIN_X, MAX_X);
+        clampedPosition.z = Mathf.Clamp(clampedPosition.z, MIN_Z, MAX_Z);
+
+        // Only apply clamping if player is out of bounds (prevents jitter)
+        if (clampedPosition != rb.position)
+        {
+            rb.position = clampedPosition;
+        }
     }
 
     private void CheckForAttack()
@@ -79,4 +82,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collided with: " + collision.gameObject.name);
+    }
 }

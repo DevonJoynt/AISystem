@@ -626,7 +626,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 64
+  m_Constraints: 84
   m_CollisionDetection: 1
 --- !u!1 &97904764
 GameObject:
@@ -2487,7 +2487,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 84
   m_CollisionDetection: 1
 --- !u!195 &412436165
 NavMeshAgent:
@@ -5133,7 +5133,7 @@ Transform:
   m_GameObject: {fileID: 987936467}
   serializedVersion: 2
   m_LocalRotation: {x: 0.676266, y: -0, z: -0, w: 0.7366575}
-  m_LocalPosition: {x: 126.4, y: 217.4, z: 0.6}
+  m_LocalPosition: {x: 126.4, y: 177.8, z: -10.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
