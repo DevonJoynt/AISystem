@@ -10365,7 +10365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49fd57dc795b0d448a2913dee9f13892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDoorOpen: 1
+  isDoorOpen: 0
   doorSpeed: 10
   onDoorStateChanged:
     m_PersistentCalls:
@@ -11457,7 +11457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49fd57dc795b0d448a2913dee9f13892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDoorOpen: 1
+  isDoorOpen: 0
   doorSpeed: 10
   onDoorStateChanged:
     m_PersistentCalls:
@@ -11586,7 +11586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49fd57dc795b0d448a2913dee9f13892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDoorOpen: 1
+  isDoorOpen: 0
   doorSpeed: 10
   onDoorStateChanged:
     m_PersistentCalls:
