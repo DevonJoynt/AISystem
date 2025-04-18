@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     public const float MIN_X = -50;
-    public const float MAX_X = 50;
+    public const float MAX_X = 300;
     public const float MIN_Z = -50;
     public const float MAX_Z = 50;
 
@@ -16,29 +17,46 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject attackGO;
 
+    private Rigidbody rb;
+    private Vector3 movement;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        ProcessInput();
         CheckBounds();
-
         CheckForAttack();
     }
 
-    private void MovePlayer()
+    void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    private void ProcessInput()
     {
         float dx = Input.GetAxis("Horizontal");
         float dz = Input.GetAxis("Vertical");
 
-        Vector3 dir = new Vector3(dx, 0, dz);
-        dir.Normalize();
+        movement = new Vector3(dx, 0, dz).normalized * speed;
 
-        if (dir.sqrMagnitude > 0)
+        if (movement.sqrMagnitude > 0)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotateSpeed * Time.deltaTime);
+            // Rotate smoothly toward movement direction
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
         }
+    }
 
-        transform.Translate(dir * speed * Time.deltaTime, Space.World);
+    private void MovePlayer()
+    {
+        Vector3 newPosition = rb.position + movement * Time.fixedDeltaTime;
+        rb.MovePosition(newPosition);
     }
 
     private void CheckBounds()
@@ -51,7 +69,6 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(x, transform.position.y, z);
     }
 
-
     private void CheckForAttack()
     {
         bool checkAttack = Input.GetButtonDown("Fire1");
@@ -60,6 +77,6 @@ public class PlayerController : MonoBehaviour
         {
             attackGO.SetActive(true);
         }
-
     }
+
 }
