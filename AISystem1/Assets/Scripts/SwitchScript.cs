@@ -1,30 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class SwitchScript : MonoBehaviour
 {
-    [SerializeField] DoorScript doorScript;  //door is controlled by this switch
-    [SerializeField] bool isDoorOpenSwitch;   //determines if this switch opens door
-    [SerializeField] bool isDoorCloseSwitch;   //determines if this switch closes door
+    [SerializeField] DoorScript doorBehaviour; // make sure this matches your door script name
+    [SerializeField] bool isDoorOpenSwitch = true;  // Set true to open the door
+    [SerializeField] bool isDoorCloseSwitch = false; // Set true to close the door (optional)
 
     float switchSizeY;
-    Vector3 switchUpPos;   //unpressed position
-    Vector3 switchDownPos;   //pressed position
+    Vector3 switchUpPos;
+    Vector3 switchDownPos;
 
-    [SerializeField] float switchSpeed = 1f;   //speed switch moves when pressed
-    [SerializeField] float switchDelay = 0.2f;   //delay before switch released
+    [SerializeField] float switchSpeed = 1f;  // Speed of switch animation
+    [SerializeField] float switchDelay = 0.2f;  // Delay before switch pops back up
 
-    bool isPressingSwitch = false;   //is switch currently being pressed
+    bool isPressingSwitch = false;
 
-    // Removed: requiredItem & inventory check
-
-    // Add Unity Events
     [Header("Events")]
-    public UnityEvent onSwitchPressed = new UnityEvent();  //event fires when switch is pressed
-    public UnityEvent onSwitchReleased = new UnityEvent();   //event fires when switch is released
-    public UnityEvent onSwitchActivated = new UnityEvent();   //event fires when switch is activated
+    public UnityEvent onSwitchPressed = new UnityEvent();   // Called when switch is fully pressed down
+    public UnityEvent onSwitchReleased = new UnityEvent();  // Called when switch is fully up
+    public UnityEvent onSwitchActivated = new UnityEvent(); // Called when player steps on the switch
 
     void Awake()
     {
@@ -50,7 +46,6 @@ public class SwitchScript : MonoBehaviour
         if (transform.position != switchDownPos)
         {
             transform.position = Vector3.MoveTowards(transform.position, switchDownPos, switchSpeed * Time.deltaTime);
-
             if (transform.position == switchDownPos)
             {
                 onSwitchPressed.Invoke();
@@ -63,7 +58,6 @@ public class SwitchScript : MonoBehaviour
         if (transform.position != switchUpPos)
         {
             transform.position = Vector3.MoveTowards(transform.position, switchUpPos, switchSpeed * Time.deltaTime);
-
             if (transform.position == switchUpPos)
             {
                 onSwitchReleased.Invoke();
@@ -71,27 +65,28 @@ public class SwitchScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("Player stepped on the switch!"); // Helps with debugging
+
             isPressingSwitch = !isPressingSwitch;
 
-            // Invoke success event
             onSwitchActivated.Invoke();
 
-            if (isDoorOpenSwitch && !doorScript.isDoorOpen)
+            if (isDoorOpenSwitch && !doorBehaviour.isDoorOpen)
             {
-                doorScript.SetDoorState(true);
+                doorBehaviour.SetDoorState(true); // Open the door
             }
-            else if (isDoorCloseSwitch && doorScript.isDoorOpen)
+            else if (isDoorCloseSwitch && doorBehaviour.isDoorOpen)
             {
-                doorScript.SetDoorState(false);
+                doorBehaviour.SetDoorState(false); // Close the door
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.CompareTag("Player"))
         {

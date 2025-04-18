@@ -302,6 +302,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1617412927}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &81616569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 81616570}
+  m_Layer: 0
+  m_Name: Respawn Point
+  m_TagString: Enemy
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &81616570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81616569}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -41.18, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &89066137
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +626,7 @@ Transform:
   m_GameObject: {fileID: 94122869}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.3, y: 0, z: 1}
+  m_LocalPosition: {x: -43.3, y: 0, z: 2.54}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1337,6 +1368,7 @@ GameObject:
   - component: {fileID: 153081123}
   - component: {fileID: 153081122}
   - component: {fileID: 153081121}
+  - component: {fileID: 153081128}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Enemy
@@ -1387,7 +1419,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 84
   m_CollisionDetection: 1
 --- !u!195 &153081123
 NavMeshAgent:
@@ -1497,6 +1529,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 62880323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &153081128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153081120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0757c5a91067ca24b85b16d08b9dea4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 94122869}
+  respawnPoint: {fileID: 81616570}
 --- !u!1 &157325301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,6 +1558,7 @@ GameObject:
   - component: {fileID: 157325305}
   - component: {fileID: 157325304}
   - component: {fileID: 157325303}
+  - component: {fileID: 157325309}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Enemy
@@ -1579,7 +1626,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 84
   m_CollisionDetection: 1
 --- !u!195 &157325305
 NavMeshAgent:
@@ -1674,6 +1721,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157325301}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &157325309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157325301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0757c5a91067ca24b85b16d08b9dea4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 94122869}
+  respawnPoint: {fileID: 81616570}
 --- !u!1 &163453840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2420,6 +2481,7 @@ GameObject:
   - component: {fileID: 412436165}
   - component: {fileID: 412436164}
   - component: {fileID: 412436163}
+  - component: {fileID: 412436169}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -2582,6 +2644,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412436161}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &412436169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412436161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0757c5a91067ca24b85b16d08b9dea4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  respawnPoint: {fileID: 0}
 --- !u!1 &420912886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3600,6 +3676,7 @@ GameObject:
   - component: {fileID: 553997674}
   - component: {fileID: 553997673}
   - component: {fileID: 553997672}
+  - component: {fileID: 553997679}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -3652,7 +3729,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!195 &553997674
 NavMeshAgent:
@@ -3762,6 +3839,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 62880323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &553997679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553997671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0757c5a91067ca24b85b16d08b9dea4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 94122869}
+  respawnPoint: {fileID: 81616570}
 --- !u!1 &560162874
 GameObject:
   m_ObjectHideFlags: 0
@@ -4012,7 +4103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1858f0928c12b4688c8ad67dabf11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorScript: {fileID: 2057798175}
+  doorBehaviour: {fileID: 2057798175}
   isDoorOpenSwitch: 1
   isDoorCloseSwitch: 0
   switchSpeed: 1
@@ -4517,6 +4608,7 @@ GameObject:
   - component: {fileID: 785433532}
   - component: {fileID: 785433531}
   - component: {fileID: 785433530}
+  - component: {fileID: 785433537}
   m_Layer: 0
   m_Name: Enemy 4
   m_TagString: Enemy
@@ -4679,6 +4771,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 62880323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &785433537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785433529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0757c5a91067ca24b85b16d08b9dea4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 94122869}
+  respawnPoint: {fileID: 81616570}
 --- !u!1 &795422301
 GameObject:
   m_ObjectHideFlags: 0
@@ -5943,6 +6049,7 @@ GameObject:
   - component: {fileID: 1069925439}
   - component: {fileID: 1069925438}
   - component: {fileID: 1069925437}
+  - component: {fileID: 1069925444}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: Enemy
@@ -5993,7 +6100,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 84
   m_CollisionDetection: 1
 --- !u!195 &1069925439
 NavMeshAgent:
@@ -6103,6 +6210,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 62880323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1069925444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069925436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0757c5a91067ca24b85b16d08b9dea4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 94122869}
+  respawnPoint: {fileID: 81616570}
 --- !u!1 &1148889263
 GameObject:
   m_ObjectHideFlags: 0
@@ -7266,7 +7387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1858f0928c12b4688c8ad67dabf11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorScript: {fileID: 2040497103}
+  doorBehaviour: {fileID: 2040497103}
   isDoorOpenSwitch: 1
   isDoorCloseSwitch: 0
   switchSpeed: 1
@@ -8358,7 +8479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1858f0928c12b4688c8ad67dabf11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorScript: {fileID: 1677210347}
+  doorBehaviour: {fileID: 1677210347}
   isDoorOpenSwitch: 1
   isDoorCloseSwitch: 0
   switchSpeed: 1
@@ -9280,7 +9401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49fd57dc795b0d448a2913dee9f13892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDoorOpen: 1
+  isDoorOpen: 0
   doorSpeed: 10
   onDoorStateChanged:
     m_PersistentCalls:
@@ -10293,7 +10414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49fd57dc795b0d448a2913dee9f13892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDoorOpen: 1
+  isDoorOpen: 0
   doorSpeed: 10
   onDoorStateChanged:
     m_PersistentCalls:
@@ -10422,7 +10543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49fd57dc795b0d448a2913dee9f13892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDoorOpen: 1
+  isDoorOpen: 0
   doorSpeed: 10
   onDoorStateChanged:
     m_PersistentCalls:
@@ -11069,3 +11190,4 @@ SceneRoots:
   - {fileID: 1475691489}
   - {fileID: 588672811}
   - {fileID: 1367756751}
+  - {fileID: 81616570}
