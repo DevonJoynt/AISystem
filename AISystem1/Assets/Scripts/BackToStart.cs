@@ -8,7 +8,7 @@ public class BackToStart : MonoBehaviour
     public Transform respawnPoint;
 
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player")) // if object is labeled player, loses life and moves back, or game over
         {
