@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelEndTrigger : MonoBehaviour
+public class EndOfLevel : MonoBehaviour
 {
     [SerializeField] GameObject levelEndUI;     // The LevelEndScreen UI Panel
     [SerializeField] Button restartButton;      // The Play Again button (assign in Inspector)
